@@ -36,8 +36,12 @@ def get_model(model_name, cfg):
     elif model_name == 'transformer':
         from src.models.transformer import ECG_Transformer
         return ECG_Transformer(
-            num_classes=cfg['classes']['num_classes'],
-            dropout=cfg['models']['transformer']['dropout']
+            num_classes=cfg["classes"]["num_classes"],
+            dropout=cfg["models"]["transformer"]["dropout"],
+            d_model=cfg["models"]["transformer"]["d_model"],
+            nhead=cfg["models"]["transformer"]["nhead"],
+            num_layers=cfg["models"]["transformer"]["num_layers"],
+            max_len=cfg["data"]["segment_length"],
         )
     else:
         raise ValueError(f"Unknown model: {model_name}")
