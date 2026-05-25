@@ -6,27 +6,28 @@ import torch
 import torch.nn as nn
 import yaml
 from sklearn.metrics import f1_score
-from src.dataset import get_dataloaders
-from src.utils.preprocessing import load_splits
 from torch.optim import Adam
 from torch.optim.lr_scheduler import CosineAnnealingLR
 
+from ecg_arrhythmia_benchmark.dataset import get_dataloaders
+from ecg_arrhythmia_benchmark.utils.preprocessing import load_splits
+
 
 def load_config(path="config.yaml"):
-    with open(path) as f:
+    with open(path, encoding="utf-8") as f:
         return yaml.safe_load(f)
 
 
 def get_model(model_name, cfg):
     if model_name == "cnn":
-        from src.models.cnn import ECG_CNN
+        from ecg_arrhythmia_benchmark.models.cnn import ECG_CNN
 
         return ECG_CNN(
             num_classes=cfg["classes"]["num_classes"],
             dropout=cfg["models"]["cnn"]["dropout"],
         )
     elif model_name == "lstm":
-        from src.models.lstm import ECG_BiLSTM
+        from ecg_arrhythmia_benchmark.models.lstm import ECG_BiLSTM
 
         return ECG_BiLSTM(
             num_classes=cfg["classes"]["num_classes"],
@@ -35,11 +36,15 @@ def get_model(model_name, cfg):
             dropout=cfg["models"]["lstm"]["dropout"],
         )
     elif model_name == "transformer":
-        from src.models.transformer import ECG_Transformer
+        from ecg_arrhythmia_benchmark.models.transformer import ECG_Transformer
 
         return ECG_Transformer(
             num_classes=cfg["classes"]["num_classes"],
             dropout=cfg["models"]["transformer"]["dropout"],
+            d_model=cfg["models"]["transformer"]["d_model"],
+            nhead=cfg["models"]["transformer"]["nhead"],
+            num_layers=cfg["models"]["transformer"]["num_layers"],
+            max_len=cfg["data"]["segment_length"],
         )
     else:
         raise ValueError(f"Unknown model: {model_name}")
@@ -164,7 +169,7 @@ def train(model_name):
             break
 
     # Save history
-    with open(f"results/metrics/{model_name}_history.json", "w") as f:
+    with open(f"results/metrics/{model_name}_history.json", "w", encoding="utf-8") as f:
         json.dump(history, f, indent=2)
     print(f"\nTraining complete. Best val F1: {best_val_f1:.4f}")
 
