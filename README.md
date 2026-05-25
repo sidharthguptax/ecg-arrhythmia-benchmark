@@ -16,7 +16,7 @@ Multi-class classification of heartbeat segments into 5 AAMI classes: Normal (N)
 |---|---|---|---|
 | 1D CNN | 232k | 0.9700 | 0.9691 |
 | BiLSTM | 546k | 0.9599 | 0.9645 |
-| CNN + Transformer | — | 0.9750 | 0.9713 |
+| CNN + Transformer | 345k | 0.9750 | 0.9713 |
 
 ## Results
 
