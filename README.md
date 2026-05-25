@@ -20,9 +20,6 @@ Multi-class classification of heartbeat segments into 5 AAMI classes: Normal (N)
 
 ## Results
 
-![Training Curves](results/figures/training_curves_all.png)
-![Confusion Matrices](results/figures/confusion_matrices.png)
-
 | Model | N | L | R | V | A | Macro F1 |
 |---|---|---|---|---|---|---|
 | CNN | 0.9939 | 0.9934 | 0.9922 | 0.9736 | 0.8923 | 0.9691 |
