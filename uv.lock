@@ -816,9 +816,9 @@ wheels = [
 ]
 
 [[package]]
-name = "ecg-arrhythmia-benchmark"
+name = "ecg_arrhythmia_benchmark"
 version = "0.1.0"
-source = { virtual = "." }
+source = { editable = "." }
 dependencies = [
     { name = "imbalanced-learn" },
     { name = "ipykernel" },

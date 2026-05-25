@@ -1,8 +1,12 @@
 [project]
-name = "ecg-arrhythmia-benchmark"
+name = "ecg_arrhythmia_benchmark"
 version = "0.1.0"
 description = "Add your description here"
 readme = "README.md"
+authors = [
+    { name = "Roy Rimachi", email = "rj.rimachi@gmail.com" },
+    { name = "Sidharth Gupta", email = "sidharthguptax@gmail.com" }
+]
 requires-python = ">=3.10"
 dependencies = [
     "imbalanced-learn>=0.14.1",
@@ -25,6 +29,10 @@ dev = [
     "ruff>=0.15.14",
 ]
 
+[build-system]
+requires = ["uv_build>=0.11.16,<0.12.0"]
+build-backend = "uv_build"
+
 [tool.ruff]
 line-length = 88
 target-version = "py312"
@@ -32,3 +40,8 @@ target-version = "py312"
 [tool.ruff.lint]
 select = ["E", "F", "I", "B"]
 fixable = ["ALL"]
+
+[tool.uv.workspace]
+members = [
+    "ecg_arrhythmia_benchmark",
+]

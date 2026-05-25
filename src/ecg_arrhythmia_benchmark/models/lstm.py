@@ -12,14 +12,14 @@ class ECG_BiLSTM(nn.Module):
             num_layers=num_layers,
             batch_first=True,
             bidirectional=True,
-            dropout=dropout if num_layers > 1 else 0.0
+            dropout=dropout if num_layers > 1 else 0.0,
         )
 
         self.classifier = nn.Sequential(
             nn.Linear(hidden_size * 2, 64),  # *2 because bidirectional
             nn.ReLU(),
             nn.Dropout(dropout),
-            nn.Linear(64, num_classes)
+            nn.Linear(64, num_classes),
         )
 
     def forward(self, x):
@@ -36,7 +36,7 @@ class ECG_BiLSTM(nn.Module):
         return x
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     model = ECG_BiLSTM()
     dummy = torch.randn(32, 1, 180)
     out = model(dummy)
